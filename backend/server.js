@@ -1316,7 +1316,7 @@ app.post('/api/teacher-applications', upload.single('resume'), [
   body('subject').isLength({ min: 2, max: 100 }).trim().escape(),
   body('qualification').optional().isLength({ max: 200 }).trim().escape(),
   body('experience').optional().isLength({ max: 500 }).trim().escape(),
-], (req, res) => {
+], async (req, res) => {
   console.log('Received teacher application submission:', req.body);
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

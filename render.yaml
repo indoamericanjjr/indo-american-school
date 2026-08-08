@@ -9,7 +9,7 @@ services:
       - key: SHARP_IGNORE_GLOBAL_LIBVIPS
         value: "1"
       - key: NODE_VERSION
-        value: "20.18.0"
+        value: "20.19.0"
       - key: NODE_ENV
         value: production
       - key: PORT
