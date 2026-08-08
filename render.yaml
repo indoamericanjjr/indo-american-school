@@ -15,13 +15,9 @@ services:
       - key: PORT
         value: 10000
       - key: SUPABASE_URL
-        fromService:
-          name: supabase
-          key: SUPABASE_URL
+        value: "https://fkxgbxhnhjjivufjyzuq.supabase.co"
       - key: SUPABASE_SERVICE_ROLE_KEY
-        fromService:
-          name: supabase
-          key: SUPABASE_SERVICE_ROLE_KEY
+        value: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjdml6cWJmdWxobHF0b2FiZGRvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NjE5MzM3MCwiZXhwIjoyMTAxNzY5MzcwfQ.Pq_0FrXXLtXBBgGvLh9XRWkZ-l1JqnYhuq2ey6ztSMY"
       - key: CLOUDINARY_CLOUD_NAME
         fromService:
           name: cloudinary
