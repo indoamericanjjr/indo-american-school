@@ -1059,8 +1059,9 @@ const Admin = () => {
                               </Button>
                               {application.resume_url && (
                                 <Button variant="outline" size="sm" onClick={() => {
-                                  const filename = application.resume_url.split('/').pop();
-                                  setPdfViewer({ url: `/view-pdf/${filename}`, title: `${application.name}'s Resume` });
+                                  const rUrl = application.resume_url;
+                                  const target = rUrl.startsWith('http') ? rUrl : `/uploads/${rUrl.split('/').pop()}`;
+                                  setPdfViewer({ url: target, title: `${application.full_name || application.name || 'Applicant'}'s Resume` });
                                 }}>
                                   <Eye className="w-4 h-4" />
                                 </Button>
@@ -1902,9 +1903,9 @@ const Admin = () => {
                             </Button>
                             {application.resume_url && (
                               <Button variant="outline" size="sm" onClick={() => {
-                                const filename = application.resume_url.split('/').pop();
-                                const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
-                                setPdfViewer({ url: `${baseUrl}/view-pdf/${filename}`, title: `${application.name}'s Resume` });
+                                const rUrl = application.resume_url;
+                                const target = rUrl.startsWith('http') ? rUrl : `${import.meta.env.VITE_API_BASE_URL || ''}/uploads/${rUrl.split('/').pop()}`;
+                                setPdfViewer({ url: target, title: `${application.full_name || application.name || 'Applicant'}'s Resume` });
                               }}>
                                 <Eye className="w-4 h-4" />
                               </Button>
@@ -2051,7 +2052,9 @@ const Admin = () => {
             <div className="flex-1 bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden">
               {pdfViewer && (
                 <iframe
-                  src={pdfViewer.url}
+                  src={pdfViewer.url.startsWith('http') && !pdfViewer.url.includes('docs.google.com')
+                    ? `https://docs.google.com/viewer?url=${encodeURIComponent(pdfViewer.url)}&embedded=true`
+                    : pdfViewer.url}
                   className="w-full h-full border-0 rounded-lg"
                   title={pdfViewer.title}
                   allowFullScreen

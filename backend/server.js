@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === 'production') {
         scriptSrc: ["'self'", "'unsafe-inline'"],
         imgSrc: ["'self'", "data:", "https:"],
         connectSrc: ["'self'", "https:"],
-        frameSrc: ["'self'", "https://www.google.com", "https://maps.google.com"],
+        frameSrc: ["'self'", "https://www.google.com", "https://maps.google.com", "https://docs.google.com", "https://res.cloudinary.com"],
       },
     },
   }));
@@ -293,11 +293,9 @@ app.get('/view-image/:filename', (req, res) => {
 
 app.get('/view-pdf/:filename', (req, res) => {
   const filename = req.params.filename;
-  const filePath = path.join(uploadsDir, filename);
-
-  if (!fs.existsSync(filePath)) {
-    return res.status(404).send('File not found.');
-  }
+  const cloudUrl = getCloudinaryUrl(filename);
+  const localPath = findLocalUploadFile(filename);
+  const pdfTargetUrl = cloudUrl ? cloudUrl : `/uploads/${encodeURIComponent(filename)}`;
 
   // Set security headers to allow embedding
   res.removeHeader('X-Frame-Options');
@@ -402,14 +400,14 @@ app.get('/view-pdf/:filename', (req, res) => {
         </div>
       </div>
       <div class="actions">
-        <button class="btn btn-gold" onclick="window.open('/uploads/${filename}', '_blank')">
+        <button class="btn btn-gold" onclick="window.open('${pdfTargetUrl}', '_blank')">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
           <span>Open Original</span>
         </button>
       </div>
     </header>
       <main class="viewer-container">
-      <iframe src="${uploadsMap[filename] ? uploadsMap[filename] + '#toolbar=1' : '/uploads/' + encodeURIComponent(filename) + '#toolbar=1'}" title="PDF Viewer"></iframe>
+      <iframe src="${pdfTargetUrl}#toolbar=1" title="PDF Viewer"></iframe>
     </main>
     <footer class="footer">
       PDF IDENTIFIER: ${filename} | &copy; 2026 Indo American School. All rights reserved.
