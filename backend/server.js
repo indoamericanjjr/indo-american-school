@@ -84,6 +84,18 @@ if (fs.existsSync(uploadsMapPath)) {
   }
 }
 
+// Helper to find Cloudinary URL for a requested filename
+const getCloudinaryUrl = (fn) => {
+  if (!fn) return null;
+  if (uploadsMap[fn]) return uploadsMap[fn];
+  const cleanFn = fn.toLowerCase().trim();
+  const matchedKey = Object.keys(uploadsMap).find(k => {
+    const kl = k.toLowerCase();
+    return kl === cleanFn || kl.endsWith(cleanFn) || cleanFn.endsWith(kl) || kl.includes(cleanFn);
+  });
+  return matchedKey ? uploadsMap[matchedKey] : null;
+};
+
 // Middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -94,7 +106,7 @@ app.get('/view-image/:filename', (req, res) => {
   const filePath = path.join(uploadsDir, filename);
 
   // prefer cloudinary mapping
-  const cloudUrl = uploadsMap[filename];
+  const cloudUrl = getCloudinaryUrl(filename);
   if (!cloudUrl && !fs.existsSync(filePath)) {
     return res.status(404).send('Image not found.');
   }
@@ -393,9 +405,10 @@ app.get('/uploads/:filename', async (req, res) => {
   console.log(`[file-server] Requested: ${filename}`);
 
   // If mapping exists, redirect to Cloudinary URL
-  if (uploadsMap[filename]) {
-    console.log(`[file-server] Redirecting ${filename} -> ${uploadsMap[filename]}`);
-    return res.redirect(302, uploadsMap[filename]);
+  const cloudUrl = getCloudinaryUrl(filename);
+  if (cloudUrl) {
+    console.log(`[file-server] Redirecting ${filename} -> ${cloudUrl}`);
+    return res.redirect(302, cloudUrl);
   }
 
   if (!fs.existsSync(filePath)) {
