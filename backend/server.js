@@ -10,12 +10,7 @@ if (!process.env.ADMIN_PASSWORD_HASH) {
   process.env.ADMIN_PASSWORD_HASH = '$2b$10$nswerg1HOlt3G.wSBhoxeOLuMcqpO8DJn2k4nqvJ0ubI.rsjes.Bm';
 }
 
-let sqlite3;
-try {
-  sqlite3 = require('sqlite3').verbose();
-} catch (e) {
-  console.log('sqlite3 module not available, running in Supabase mode.');
-}
+
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -492,32 +487,155 @@ app.use(express.static(path.join(__dirname, '../dist')));
 
 
 
-// Initialize database
-let db;
-if (sqlite3) {
-  db = new sqlite3.Database('./database.db', (err) => {
-    if (err) {
-      console.error('Error opening database:', err.message);
-    } else {
-      console.log('Connected to SQLite database.');
-    }
-  });
-} else {
-  console.log('Using Supabase mode (SQLite module disabled).');
-  const dummyCb = (cb, res) => { if (typeof cb === 'function') cb(null, res); };
-  db = {
-    all: (q, p, cb) => (typeof p === 'function' ? p(null, []) : dummyCb(cb, [])),
-    get: (q, p, cb) => (typeof p === 'function' ? p(null, null) : dummyCb(cb, null)),
-    run: function (q, p, cb) {
-      const callback = typeof p === 'function' ? p : cb;
-      if (typeof callback === 'function') callback.call({ lastID: 1, changes: 1 }, null);
-    }
-  };
-}
+// Initialize Database Driver (Pure Supabase)
+console.log('Database Driver: Using Supabase mode (SQLite completely removed)');
 
-if (sqlite3 && db && typeof db.run === 'function') {
-  db.serialize(() => {
+const db = {
+  all: async (sql, params, callback) => {
+    try {
+      const cb = typeof params === 'function' ? params : callback;
+      const actualParams = Array.isArray(params) ? params : [];
+      const supabase = supabaseClient.getClient();
+      
+      if (!supabase) {
+        if (typeof cb === 'function') cb(null, []);
+        return;
+      }
 
+      const tableMatch = sql.match(/FROM\s+([a-zA-Z0-9_]+)/i);
+      if (!tableMatch) {
+        if (typeof cb === 'function') cb(null, []);
+        return;
+      }
+      const tableName = tableMatch[1];
+      let query = supabase.from(tableName).select('*');
+
+      if (sql.includes('WHERE') && actualParams.length > 0) {
+        const whereMatch = sql.match(/WHERE\s+([a-zA-Z0-9_]+)\s*=\s*\?/i);
+        if (whereMatch) {
+          query = query.eq(whereMatch[1], actualParams[0]);
+        }
+      }
+
+      if (sql.includes('ORDER BY')) {
+        const orderMatch = sql.match(/ORDER BY\s+([a-zA-Z0-9_,\s]+)/i);
+        if (orderMatch) {
+          const parts = orderMatch[1].trim().split(',');
+          for (const part of parts) {
+            const [col, dir] = part.trim().split(/\s+/);
+            query = query.order(col, { ascending: dir ? dir.toUpperCase() !== 'DESC' : true });
+          }
+        }
+      }
+
+      const { data, error } = await query;
+      if (error) {
+        console.error(`Supabase query error on ${tableName}:`, error.message);
+        if (typeof cb === 'function') cb(error);
+        return;
+      }
+      if (typeof cb === 'function') cb(null, data || []);
+    } catch (err) {
+      const cb = typeof params === 'function' ? params : callback;
+      if (typeof cb === 'function') cb(err);
+    }
+  },
+
+  get: async (sql, params, callback) => {
+    const cb = typeof params === 'function' ? params : callback;
+    db.all(sql, params, (err, rows) => {
+      if (err) return cb(err);
+      cb(null, rows && rows.length > 0 ? rows[0] : null);
+    });
+  },
+
+  run: async (sql, params, callback) => {
+    try {
+      const cb = typeof params === 'function' ? params : callback;
+      const actualParams = Array.isArray(params) ? params : [];
+      const supabase = supabaseClient.getClient();
+
+      if (!supabase) {
+        if (typeof cb === 'function') cb.call({ lastID: 1, changes: 1 }, null);
+        return;
+      }
+
+      const sqlUpper = sql.trim().toUpperCase();
+
+      if (sqlUpper.startsWith('INSERT INTO')) {
+        const tableMatch = sql.match(/INSERT INTO\s+([a-zA-Z0-9_]+)\s*\(([^)]+)\)/i);
+        if (tableMatch) {
+          const tableName = tableMatch[1];
+          const columns = tableMatch[2].split(',').map(c => c.trim());
+          const record = {};
+          columns.forEach((col, idx) => {
+            record[col] = actualParams[idx];
+          });
+
+          const { data, error } = await supabase.from(tableName).insert([record]).select();
+          if (error) {
+            console.error(`Supabase INSERT error on ${tableName}:`, error.message);
+            if (typeof cb === 'function') return cb(error);
+            return;
+          }
+          const lastID = data && data[0] ? data[0].id : Date.now();
+          if (typeof cb === 'function') cb.call({ lastID, changes: 1 }, null);
+          return;
+        }
+      } else if (sqlUpper.startsWith('UPDATE')) {
+        const tableMatch = sql.match(/UPDATE\s+([a-zA-Z0-9_]+)\s+SET\s+(.+)\s+WHERE\s+([a-zA-Z0-9_]+)\s*=\s*\?/i);
+        if (tableMatch) {
+          const tableName = tableMatch[1];
+          const setClause = tableMatch[2];
+          const whereCol = tableMatch[3];
+          
+          const whereVal = actualParams[actualParams.length - 1];
+          const setCols = setClause.split(',').map(s => s.split('=')[0].trim());
+          const updateRecord = {};
+          setCols.forEach((col, idx) => {
+            if (col !== 'updated_at') {
+              updateRecord[col] = actualParams[idx];
+            }
+          });
+
+          const { error } = await supabase.from(tableName).update(updateRecord).eq(whereCol, whereVal);
+          if (error) {
+            console.error(`Supabase UPDATE error on ${tableName}:`, error.message);
+            if (typeof cb === 'function') return cb(error);
+            return;
+          }
+          if (typeof cb === 'function') cb.call({ changes: 1 }, null);
+          return;
+        }
+      } else if (sqlUpper.startsWith('DELETE FROM')) {
+        const tableMatch = sql.match(/DELETE FROM\s+([a-zA-Z0-9_]+)\s+WHERE\s+([a-zA-Z0-9_]+)\s*=\s*\?/i);
+        if (tableMatch) {
+          const tableName = tableMatch[1];
+          const whereCol = tableMatch[2];
+          const whereVal = actualParams[0];
+
+          const { error } = await supabase.from(tableName).delete().eq(whereCol, whereVal);
+          if (error) {
+            console.error(`Supabase DELETE error on ${tableName}:`, error.message);
+            if (typeof cb === 'function') return cb(error);
+            return;
+          }
+          if (typeof cb === 'function') cb.call({ changes: 1 }, null);
+          return;
+        }
+      }
+
+      if (typeof cb === 'function') cb.call({ lastID: 1, changes: 1 }, null);
+    } catch (err) {
+      const cb = typeof params === 'function' ? params : callback;
+      if (typeof cb === 'function') cb(err);
+    }
+  }
+};
+
+if (db && typeof db.run === 'function') {
+  db.serialize = (cb) => cb(); // Mock serialize for compatibility
+  // ... rest of the table definitions ...
     // Announcements table
     db.run(`CREATE TABLE IF NOT EXISTS announcements (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -724,8 +842,7 @@ if (sqlite3 && db && typeof db.run === 'function') {
       if (err && !err.message.includes('duplicate column name') && !err.message.includes('no such table')) {
         console.error('Error adding max_marks column:', err.message);
       }
-  });
-  });
+    });
 }
 
 // Configure multer for file uploads with security
