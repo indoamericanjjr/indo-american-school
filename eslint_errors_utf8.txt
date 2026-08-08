@@ -1,0 +1,26 @@
+
+C:\indo-american-connect-main1\indo-american-connect-main\src\pages\ErpTeacherDashboard.tsx
+   167:93   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   224:169  error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   310:141  error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   343:119  error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   361:75   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   404:90   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   433:98   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   473:106  error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   491:94   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   688:42   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   711:50   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   763:6    warning  React Hook useEffect has a missing dependency: 'navigate'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   903:39   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   918:33   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   937:36   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   956:40   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+   975:37   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+  1064:46   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+  1100:49   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+  1136:51   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+  1172:53   error    Unexpected any. Specify a different type                                                                     @typescript-eslint/no-explicit-any
+
+G£û 21 problems (20 errors, 1 warning)
+

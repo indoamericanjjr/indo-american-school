@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+/* stylelint-disable at-rule-no-unknown */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 217 91% 28%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 45 100% 51%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 217 91% 95%;
+    --accent-foreground: 217 91% 28%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 28%;
+    --radius: 0.75rem;
+
+    /* Original Premium Variables */
+    --school-blue: 217 91% 28%;
+    --school-blue-light: 217 85% 50%;
+    --school-blue-dark: 217 91% 18%;
+    --school-gold: 45 100% 51%;
+    --school-gold-light: 45 100% 65%;
+    --school-gold-dark: 40 95% 42%;
+    --school-cream: 45 100% 97%;
+    --school-navy: 222 47% 11%;
+    --school-success: 152 69% 41%;
+    --school-purple: 258 90% 66%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 28%) 0%, hsl(217 91% 18%) 50%, hsl(222 47% 11%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(45 100% 51%) 0%, hsl(40 95% 42%) 100%);
+    --gradient-shimmer: linear-gradient(90deg, transparent 0%, hsl(0 0% 100% / 0.2) 50%, transparent 100%);
+  }
+
+  /* dark theme overrides */
+  html.dark {
+    --background: 222 47% 11%;
+    --foreground: 220 20% 97%;
+    --card: 222 47% 11%;
+    --card-foreground: 220 20% 97%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 220 20% 97%;
+    --primary: 217 91% 28%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 45 100% 51%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 222 47% 11%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 217 91% 95%;
+    --accent-foreground: 217 91% 28%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 222 47% 11%;
+    --input: 222 47% 11%;
+    --ring: 217 91% 28%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  /* ensure taps are handled smoothly and add tactile feedback */
+  button,
+  a {
+    touch-action: manipulation;
+    cursor: pointer;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  button:active,
+  a:active {
+    transform: scale(0.98);
+  }
+
+  /* Disable active scale for disabled buttons */
+  button:disabled {
+    transform: none;
+    cursor: not-allowed;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* NOTE: Avoid overflow-x: hidden here as it breaks position: sticky on children in some browsers */
+  }
+
+  body {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-optical-sizing: auto;
+    width: 100%;
+    position: relative;
+    /* Original Copy Protection */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    line-height: 1.65;
+    letter-spacing: 0.01em;
+  }
+
+  /* Increase tracking for premium uppercase subtitles */
+  .tracking-wider {
+    letter-spacing: 0.06em;
+  }
+  
+  .tracking-widest {
+    letter-spacing: 0.12em;
+  }
+
+  :focus {
+    outline: 2px solid hsl(var(--secondary));
+    outline-offset: 2px;
+  }
+
+  ::-moz-selection {
+    background: hsl(var(--secondary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+
+  ::selection {
+    background: hsl(var(--secondary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+
+  /* utility for forcing hardware acceleration when animating */
+  .will-change-transform {
+    will-change: transform, opacity;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+
+  .animate-marquee {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 25s linear infinite;
+    will-change: transform;
+    padding-left: 100%;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  /* pull-to-refresh indicator also animates */
+  .pull-refresh-indicator {
+    will-change: transform, opacity;
+  }
+
+
+  /* Original Interaction Handling */
+  img {
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+
+  /* prevent horizontal overflow on mobile due to wide elements */
+
+
+/* NOTE: removed stray closing brace above */
+
+/*
+ * NOTE: Custom components (like .container-custom)
+ * and utilities (like .marquee) have been migrated
+ * to tailwind.config.ts to resolve linting issues.
+ */
+
+/* Global Interaction Fixes for Mobile/Touch */
+
+  /* make buttons and links respond immediately on touch devices */
+  a, button, input, textarea, select {
+    touch-action: manipulation;
+  }
+
+
+  .group:hover .group-hover\:opacity-100,
+  .group:focus .group-hover\:opacity-100,
+  .group-hover\:opacity-100 {
+    opacity: 1 !important;
+  }
+
+  .group:hover .group-hover\:translate-x-1,
+  .group:hover .group-hover\:scale-110 {
+    transform: none !important;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 10px;
+  border: 3px solid hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}

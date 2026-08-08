@@ -1,0 +1,12 @@
+node_modules
+backend/node_modules
+dist
+.dist
+test
+*.log
+.env
+.env.local
+backend/database.db
+backend/uploads
+backend/uploads_map.json
+.git
