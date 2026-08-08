@@ -88,13 +88,19 @@ if (fs.existsSync(uploadsMapPath)) {
 // Helper to find Cloudinary URL for a requested filename
 const getCloudinaryUrl = (fn) => {
   if (!fn) return null;
-  if (uploadsMap[fn]) return uploadsMap[fn];
-  const cleanFn = fn.toLowerCase().trim();
-  const matchedKey = Object.keys(uploadsMap).find(k => {
-    const kl = k.toLowerCase();
-    return kl === cleanFn || kl.endsWith(cleanFn) || cleanFn.endsWith(kl) || kl.includes(cleanFn);
-  });
-  return matchedKey ? uploadsMap[matchedKey] : null;
+  let url = uploadsMap[fn];
+  if (!url) {
+    const cleanFn = fn.toLowerCase().trim();
+    const matchedKey = Object.keys(uploadsMap).find(k => {
+      const kl = k.toLowerCase();
+      return kl === cleanFn || kl.endsWith(cleanFn) || cleanFn.endsWith(kl) || kl.includes(cleanFn);
+    });
+    if (matchedKey) url = uploadsMap[matchedKey];
+  }
+  if (url && url.includes('/upload/') && !url.includes('/f_auto,q_auto/')) {
+    url = url.replace('/upload/', '/upload/f_auto,q_auto/');
+  }
+  return url;
 };
 
 // Helper to locate local files in public/uploads, dist/uploads, or backend/uploads
@@ -421,8 +427,8 @@ app.get('/uploads/:filename', async (req, res) => {
   // 1. Check Cloudinary URL mapping first
   const cloudUrl = getCloudinaryUrl(filename);
   if (cloudUrl) {
-    console.log(`[file-server] Redirecting ${filename} -> ${cloudUrl}`);
-    return res.redirect(302, cloudUrl);
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    return res.redirect(301, cloudUrl);
   }
 
   // 2. Check local files in public/uploads, dist/uploads, or src/assets
