@@ -41,6 +41,7 @@ if (process.env.NODE_ENV === 'production') {
         scriptSrc: ["'self'", "'unsafe-inline'"],
         imgSrc: ["'self'", "data:", "https:"],
         connectSrc: ["'self'", "https:"],
+        frameSrc: ["'self'", "https://www.google.com", "https://maps.google.com"],
       },
     },
   }));
