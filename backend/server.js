@@ -640,6 +640,18 @@ const db = {
       const cb = typeof params === 'function' ? params : callback;
       if (typeof cb === 'function') cb(err);
     }
+  },
+
+  prepare: (sql) => {
+    return {
+      run: (...args) => {
+        const callback = typeof args[args.length - 1] === 'function' ? args.pop() : null;
+        db.run(sql, args, callback);
+      },
+      finalize: (cb) => {
+        if (typeof cb === 'function') cb(null);
+      }
+    };
   }
 };
 
