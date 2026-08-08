@@ -3,9 +3,13 @@ services:
     name: indo-american-connect
     env: node
     plan: starter
-    buildCommand: NPM_CONFIG_PRODUCTION=false npm ci --legacy-peer-deps && npm run build
+    buildCommand: SHARP_IGNORE_GLOBAL_LIBVIPS=1 NPM_CONFIG_PRODUCTION=false npm ci --legacy-peer-deps && npm run build
     startCommand: npm start
     envVars:
+      - key: SHARP_IGNORE_GLOBAL_LIBVIPS
+        value: "1"
+      - key: NODE_VERSION
+        value: "20.18.0"
       - key: NODE_ENV
         value: production
       - key: PORT
