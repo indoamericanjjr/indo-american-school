@@ -479,13 +479,8 @@ app.use(express.static(path.join(__dirname, '../dist')));
 console.log('Database Driver: Using Supabase mode with Hybrid Memory Store');
 
 const memoryStore = {
-  announcements: [
-    { id: 1, title: 'Welcome to Indo American School', description: 'Academic Year 2026-27 Admissions are now open. Visit campus or apply online.', type: 'general', urgent: 1, created_at: new Date().toISOString() },
-    { id: 2, title: 'Annual Sports Meet 2026', description: 'Join us for our upcoming Annual Sports Day event. All parents and students are welcome!', type: 'event', urgent: 0, created_at: new Date().toISOString() }
-  ],
-  events: [
-    { id: 1, title: 'Annual Sports Day 2026', description: 'Inter-house athletic competitions and award ceremony.', date: '2026-11-15', time: '09:00 AM', venue: 'School Sports Ground', image_url: '' }
-  ],
+  announcements: [],
+  events: [],
   hero_slides: [],
   site_images: [],
   gallery: [],

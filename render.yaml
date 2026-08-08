@@ -19,23 +19,17 @@ services:
       - key: SUPABASE_SERVICE_ROLE_KEY
         value: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjdml6cWJmdWxobHF0b2FiZGRvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NjE5MzM3MCwiZXhwIjoyMTAxNzY5MzcwfQ.Pq_0FrXXLtXBBgGvLh9XRWkZ-l1JqnYhuq2ey6ztSMY"
       - key: CLOUDINARY_CLOUD_NAME
-        fromService:
-          name: cloudinary
-          key: CLOUDINARY_CLOUD_NAME
+        value: "o0bhyhix"
       - key: CLOUDINARY_API_KEY
-        fromService:
-          name: cloudinary
-          key: CLOUDINARY_API_KEY
+        value: "497552822935358"
       - key: CLOUDINARY_API_SECRET
-        fromService:
-          name: cloudinary
-          key: CLOUDINARY_API_SECRET
+        value: "U-pZ_xqFuDE89UfigMvX1GOwwUo"
       - key: JWT_SECRET
-        value: change-me
+        value: 8c13bab6bacacf20f6135c31e9cef154254fb001b02d8ae62f9168f3bd192b1a
       - key: ADMIN_USERNAME
-        value: ias
+        value: IAS
       - key: ADMIN_PASSWORD_HASH
-        value: $2b$10$nswerg1HOlt3G.wSBhoxeOLuMcqpO8DJn2k4nqvJ0ubI.rsjes.Bm
+        value: $2b$10$bvmL3InDCx/c8b3f1f4nTu08zXVMCUErZNcesGCu.2I7y4EmsNwam
     rootDir: .
     autoDeploy: true
     plan: free
