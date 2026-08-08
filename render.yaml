@@ -3,7 +3,7 @@ services:
     name: indo-american-connect
     env: node
     plan: starter
-    buildCommand: npm install && npm run build
+    buildCommand: NPM_CONFIG_PRODUCTION=false npm ci --legacy-peer-deps && npm run build
     startCommand: npm start
     envVars:
       - key: NODE_ENV
