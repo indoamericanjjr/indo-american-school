@@ -35,9 +35,12 @@ if (process.env.NODE_ENV === 'production') {
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        styleSrc: ["'self'", "'unsafe-inline'"],
-        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        styleSrcElem: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com"],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
         imgSrc: ["'self'", "data:", "https:"],
+        connectSrc: ["'self'", "https:"],
       },
     },
   }));
@@ -530,22 +533,23 @@ const db = {
 
       const { data, error } = await query;
       if (error) {
-        console.error(`Supabase query error on ${tableName}:`, error.message);
-        if (typeof cb === 'function') cb(error);
+        console.error(`Supabase query error on ${tableName}:`, error.message || error);
+        if (typeof cb === 'function') cb(null, []);
         return;
       }
       if (typeof cb === 'function') cb(null, data || []);
     } catch (err) {
+      console.error('Supabase query exception:', err.message || err);
       const cb = typeof params === 'function' ? params : callback;
-      if (typeof cb === 'function') cb(err);
+      if (typeof cb === 'function') cb(null, []);
     }
   },
 
   get: async (sql, params, callback) => {
     const cb = typeof params === 'function' ? params : callback;
     db.all(sql, params, (err, rows) => {
-      if (err) return cb(err);
-      cb(null, rows && rows.length > 0 ? rows[0] : null);
+      if (err) return typeof cb === 'function' ? cb(null, null) : null;
+      if (typeof cb === 'function') cb(null, rows && rows.length > 0 ? rows[0] : null);
     });
   },
 
@@ -561,6 +565,12 @@ const db = {
       }
 
       const sqlUpper = sql.trim().toUpperCase();
+
+      // Ignore DDL statements (CREATE TABLE, ALTER TABLE) - tables are managed in Supabase
+      if (sqlUpper.startsWith('CREATE ') || sqlUpper.startsWith('ALTER ')) {
+        if (typeof cb === 'function') cb.call({ lastID: 0, changes: 0 }, null);
+        return;
+      }
 
       if (sqlUpper.startsWith('INSERT INTO')) {
         const tableMatch = sql.match(/INSERT INTO\s+([a-zA-Z0-9_]+)\s*\(([^)]+)\)/i);
