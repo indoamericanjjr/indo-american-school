@@ -96,6 +96,22 @@ const getCloudinaryUrl = (fn) => {
   return matchedKey ? uploadsMap[matchedKey] : null;
 };
 
+// Helper to locate local files in public/uploads, dist/uploads, or backend/uploads
+const findLocalUploadFile = (fn) => {
+  if (!fn) return null;
+  const searchPaths = [
+    path.join(__dirname, '..', 'public', 'uploads', fn),
+    path.join(__dirname, '..', 'dist', 'uploads', fn),
+    path.join(__dirname, 'uploads', fn),
+    path.join(__dirname, '..', 'public', fn),
+    path.join(__dirname, '..', 'src', 'assets', fn)
+  ];
+  for (const p of searchPaths) {
+    if (fs.existsSync(p)) return p;
+  }
+  return null;
+};
+
 // Middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
@@ -399,84 +415,30 @@ app.get('/view-pdf/:filename', (req, res) => {
 
 app.get('/uploads/:filename', async (req, res) => {
   const filename = req.params.filename;
-
-  // Serve original uploads directly (undo optimized-uploads routing)
-  const filePath = path.join(uploadsDir, filename);
   console.log(`[file-server] Requested: ${filename}`);
 
-  // If mapping exists, redirect to Cloudinary URL
+  // 1. Check Cloudinary URL mapping first
   const cloudUrl = getCloudinaryUrl(filename);
   if (cloudUrl) {
     console.log(`[file-server] Redirecting ${filename} -> ${cloudUrl}`);
     return res.redirect(302, cloudUrl);
   }
 
-  if (!fs.existsSync(filePath)) {
-    // If missing image, serve clean SVG placeholder or fallback image instead of 404
-    const isImg = /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(filename);
-    if (isImg) {
-      const fallbackPath = path.join(__dirname, '..', 'dist', 'indo-logo.png');
-      if (fs.existsSync(fallbackPath)) {
-        return res.sendFile(fallbackPath);
-      }
-      res.setHeader('Content-Type', 'image/svg+xml');
-      return res.send(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="#1a365d"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="sans-serif" font-size="18">Indo American School</text></svg>`);
+  // 2. Check local files in public/uploads, dist/uploads, or src/assets
+  const filePath = findLocalUploadFile(filename);
+  if (filePath) {
+    res.removeHeader('X-Frame-Options');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    if (filename.toLowerCase().endsWith('.pdf')) {
+      res.type('application/pdf');
+      res.setHeader('Content-Disposition', 'inline; filename="' + filename + '"');
     }
-    return res.status(404).send('File not found.');
-  }
-
-  res.removeHeader('X-Frame-Options');
-  res.setHeader('Access-Control-Allow-Origin', '*');
-
-  if (filename.toLowerCase().endsWith('.pdf')) {
-    res.type('application/pdf');
-    res.setHeader('Content-Disposition', 'inline; filename="' + filename + '"');
     return res.sendFile(filePath);
   }
 
-  res.removeHeader('X-Frame-Options');
-
-  if (filename.toLowerCase().endsWith('.pdf')) {
-    res.type('application/pdf');
-    res.setHeader('Content-Disposition', 'inline; filename="' + filename + '"');
-    return res.sendFile(filePath);
-  }
-
-  try {
-    let image = sharp(filePath);
-    const { width, height, quality, format } = req.query;
-
-    if (width || height) {
-      image = image.resize(width ? parseInt(width) : null, height ? parseInt(height) : null);
-    }
-
-    if (quality) {
-      image = image.jpeg({ quality: parseInt(quality) }).png({ quality: parseInt(quality) });
-    }
-
-    if (format === 'webp') {
-      image = image.webp({ quality: quality ? parseInt(quality) : 100 });
-      res.type('image/webp');
-    } else if (format === 'jpeg' || format === 'jpg') {
-      image = image.jpeg({ quality: quality ? parseInt(quality) : 100 });
-      res.type('image/jpeg');
-    } else if (format === 'png') {
-      image = image.png({ quality: quality ? parseInt(quality) : 100 });
-      res.type('image/png');
-    } else {
-      const ext = path.extname(filename).toLowerCase();
-      if (ext === '.webp') res.type('image/webp');
-      else if (ext === '.jpeg' || ext === '.jpg') res.type('image/jpeg');
-      else if (ext === '.png') res.type('image/png');
-    }
-
-    const processedImageBuffer = await image.toBuffer();
-    res.setHeader('Cache-Control', 'public, max-age=31536000');
-    res.send(processedImageBuffer);
-  } catch (error) {
-    res.setHeader('Cache-Control', 'public, max-age=31536000');
-    res.sendFile(filePath);
-  }
+  // 3. Fallback SVG if file does not exist anywhere
+  res.setHeader('Content-Type', 'image/svg+xml');
+  return res.send(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="#1a365d"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="sans-serif" font-size="18">Indo American School</text></svg>`);
 });
 
 // Admin login route
