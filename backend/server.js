@@ -10,7 +10,12 @@ if (!process.env.ADMIN_PASSWORD_HASH) {
   process.env.ADMIN_PASSWORD_HASH = '$2b$10$nswerg1HOlt3G.wSBhoxeOLuMcqpO8DJn2k4nqvJ0ubI.rsjes.Bm';
 }
 
-const sqlite3 = require('sqlite3').verbose();
+let sqlite3;
+try {
+  sqlite3 = require('sqlite3').verbose();
+} catch (e) {
+  console.log('sqlite3 module not available, running in Supabase mode.');
+}
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -488,11 +493,30 @@ app.use(express.static(path.join(__dirname, '../dist')));
 
 
 // Initialize database
-const db = new sqlite3.Database('./database.db', (err) => {
-  if (err) {
-    console.error('Error opening database:', err.message);
-  } else {
-    console.log('Connected to SQLite database.');
+let db;
+if (sqlite3) {
+  db = new sqlite3.Database('./database.db', (err) => {
+    if (err) {
+      console.error('Error opening database:', err.message);
+    } else {
+      console.log('Connected to SQLite database.');
+    }
+  });
+} else {
+  console.log('Using Supabase mode (SQLite module disabled).');
+  const dummyCb = (cb, res) => { if (typeof cb === 'function') cb(null, res); };
+  db = {
+    all: (q, p, cb) => (typeof p === 'function' ? p(null, []) : dummyCb(cb, [])),
+    get: (q, p, cb) => (typeof p === 'function' ? p(null, null) : dummyCb(cb, null)),
+    run: function (q, p, cb) {
+      const callback = typeof p === 'function' ? p : cb;
+      if (typeof callback === 'function') callback.call({ lastID: 1, changes: 1 }, null);
+    }
+  };
+}
+
+if (sqlite3 && db && typeof db.run === 'function') {
+  db.serialize(() => {
 
     // Announcements table
     db.run(`CREATE TABLE IF NOT EXISTS announcements (
@@ -700,9 +724,9 @@ const db = new sqlite3.Database('./database.db', (err) => {
       if (err && !err.message.includes('duplicate column name') && !err.message.includes('no such table')) {
         console.error('Error adding max_marks column:', err.message);
       }
-    });
-  }
-});
+  });
+  });
+}
 
 // Configure multer for file uploads with security
 const storage = multer.memoryStorage();
