@@ -1061,7 +1061,7 @@ const Admin = () => {
                                 <Button variant="outline" size="sm" onClick={() => {
                                   const rUrl = application.resume_url;
                                   const target = rUrl.startsWith('http') ? rUrl : `/uploads/${rUrl.split('/').pop()}`;
-                                  setPdfViewer({ url: target, title: `${application.full_name || application.name || 'Applicant'}'s Resume` });
+                                  setPdfViewer({ url: target, title: `${(application as any).full_name || application.name || 'Applicant'}'s Resume` });
                                 }}>
                                   <Eye className="w-4 h-4" />
                                 </Button>
@@ -1905,7 +1905,7 @@ const Admin = () => {
                               <Button variant="outline" size="sm" onClick={() => {
                                 const rUrl = application.resume_url;
                                 const target = rUrl.startsWith('http') ? rUrl : `${import.meta.env.VITE_API_BASE_URL || ''}/uploads/${rUrl.split('/').pop()}`;
-                                setPdfViewer({ url: target, title: `${application.full_name || application.name || 'Applicant'}'s Resume` });
+                                setPdfViewer({ url: target, title: `${(application as any).full_name || application.name || 'Applicant'}'s Resume` });
                               }}>
                                 <Eye className="w-4 h-4" />
                               </Button>
