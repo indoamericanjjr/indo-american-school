@@ -1787,7 +1787,22 @@ app.delete('/api/hero-slides/:id', authenticateToken, (req, res) => {
   });
 });
 
-// Final server setup and error handlers
+// Serve static files from the dist folder (sitemap.xml, robots.txt, ai.txt, favicon.ico, etc.)
+app.use(express.static(path.join(__dirname, '../dist'), {
+  maxAge: '1d',
+  setHeaders: (res, filePath) => {
+    // Set correct content types for SEO/crawl files
+    if (filePath.endsWith('.xml')) {
+      res.setHeader('Content-Type', 'application/xml');
+    } else if (filePath.endsWith('.txt')) {
+      res.setHeader('Content-Type', 'text/plain');
+    } else if (filePath.endsWith('.json')) {
+      res.setHeader('Content-Type', 'application/json');
+    }
+  }
+}));
+
+// SPA catch-all: serve index.html for all non-file routes (client-side routing)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
