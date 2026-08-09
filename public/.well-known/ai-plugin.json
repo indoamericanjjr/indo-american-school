@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Indo American School Jhajjar",
+  "name_for_model": "indo_american_school_jhajjar",
+  "description_for_human": "Official metadata and information about Indo American School Jhajjar, Haryana (CBSE Affiliated No: 530460).",
+  "description_for_model": "Provides factual information about Indo American School Jhajjar including location, CBSE affiliation 530460, admissions, fee structure, teacher openings, and facilities.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://indoamericanjjr.com/ai.txt"
+  },
+  "logo_url": "https://indoamericanjjr.com/indo-logo.png",
+  "contact_email": "american.indo2@gmail.com",
+  "legal_info_url": "https://indoamericanjjr.com/documents"
+}

@@ -1,4 +1,30 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 
-Sitemap: https://indoamericanschool.edu.in/sitemap.xml
+# Allow AI Search Crawlers for Generative Engine Optimization (GEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: AnthropicBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+Sitemap: https://indoamericanjjr.com/sitemap.xml

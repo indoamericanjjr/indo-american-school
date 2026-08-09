@@ -1,4 +1,5 @@
 import Layout from "@/components/layout/Layout";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -76,7 +77,56 @@ const TeacherApplications = () => {
   ];
 
   return (
-    <Layout>
+    <>
+      <Helmet>
+        <title>Current Openings & Teacher Recruitment | Indo American School Jhajjar</title>
+        <meta name="description" content="Explore Current Openings for PGT, TGT, PRT teachers, librarian & staff at Indo American School Jhajjar. Apply online with your resume for school teacher job vacancies in Jhajjar, Haryana." />
+        <meta name="keywords" content="Current Openings Indo American School, teacher vacancies Jhajjar, school teacher jobs Jhajjar, PGT TGT PRT job Jhajjar, teaching jobs Jhajjar Haryana, school recruitment Jhajjar" />
+        <link rel="canonical" href="https://indoamericanjjr.com/teacher-applications" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://indoamericanjjr.com/teacher-applications" />
+        <meta property="og:site_name" content="Indo American School Jhajjar" />
+        <meta property="og:title" content="Current Openings & Teacher Recruitment | Indo American School Jhajjar" />
+        <meta property="og:description" content="Apply online for teaching positions (PGT, TGT, PRT) at Indo American School Jhajjar. Join our team of dedicated educators." />
+        <meta property="og:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://indoamericanjjr.com/teacher-applications" />
+        <meta property="twitter:title" content="Current Openings & Teacher Recruitment | Indo American School Jhajjar" />
+        <meta property="twitter:description" content="Apply online for teaching positions at Indo American School Jhajjar." />
+        <meta property="twitter:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebPage",
+                "name": "Current Openings - Teacher Recruitment Indo American School Jhajjar",
+                "url": "https://indoamericanjjr.com/teacher-applications",
+                "description": "Current teacher job openings and online application portal for Indo American School Jhajjar.",
+                "publisher": {
+                  "@type": "School",
+                  "name": "Indo American School Jhajjar",
+                  "logo": "https://indoamericanjjr.com/indo-logo.png"
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://indoamericanjjr.com/" },
+                  { "@type": "ListItem", "position": 2, "name": "Current Openings", "item": "https://indoamericanjjr.com/teacher-applications" }
+                ]
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
+      <Layout>
       {/* Hero Section */}
       <section className="relative h-[50vh] md:h-[60vh] flex flex-col justify-center overflow-hidden bg-gradient-to-br from-accent via-accent/90 to-accent-dark">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0aDR2MWgtNHYtMXptMC0yaDF2NGgtMXYtNHptMi0yaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bTIgMmgxdjFoLTF2LTF6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-40"></div>
@@ -348,6 +398,7 @@ const TeacherApplications = () => {
         </div>
       </section>
     </Layout>
+    </>
   );
 };
 

@@ -83,13 +83,13 @@ const Footer = () => {
             </div>
             <ul className="space-y-2.5 md:space-y-3">
               {[
-                { name: "Online Admission", path: "/admissions" },
-                { name: "Fee Structure", path: "/admissions" },
-                { name: "Academic Calendar", path: "/admissions" },
-                { name: "School Uniform", path: "/admissions" },
-                { name: "Transport", path: "/admissions" },
-                { name: "Documents", path: "/documents" },
-                { name: "Download Forms", path: "/admissions" }
+                { name: "Online Fee Collection", path: "/admissions" },
+                { name: "Current Openings", path: "/teacher-applications" },
+                { name: "Fee Structure PDF", path: "/documents" },
+                { name: "CBSE Mandatory Disclosures", path: "/documents" },
+                { name: "Academic Programs", path: "/academics" },
+                { name: "Campus Facilities", path: "/facilities" },
+                { name: "Contact School", path: "/contact" }
               ].map((link) => (
                 <li key={link.name}>
                   <Link

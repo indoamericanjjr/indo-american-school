@@ -71,37 +71,50 @@ const Gallery = () => {
   return (
     <>
       <Helmet>
-        <title>Photo Gallery | Indo American School, Jhajjar | Life at IAS</title>
-        <meta name="description" content="Explore our school photo gallery showcasing student life, academic achievements, sports events, cultural festivals, and modern campus infrastructure at Indo American School, Jhajjar." />
-        <meta name="keywords" content="school photos Jhajjar, school events gallery, student life photos, Indo American School pictures, education moments gallery" />
-        <link rel="canonical" href="https://indoamericanschool.edu.in/gallery" />
+        <title>Campus Photo Gallery & Campus Life | Indo American School Jhajjar</title>
+        <meta name="description" content="Explore our photo gallery showcasing campus life, sports day, annual functions, science exhibitions, and achievements at Indo American School Jhajjar." />
+        <meta name="keywords" content="Indo American School gallery, school photos Jhajjar, school events pictures, annual day Jhajjar, sports day Jhajjar" />
+        <link rel="canonical" href="https://indoamericanjjr.com/gallery" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://indoamericanschool.edu.in/gallery" />
-        <meta property="og:title" content="Photo Gallery | Indo American School, Jhajjar | Life at IAS" />
-        <meta property="og:description" content="Experience life at Indo American School through our vibrant collection of photos from various school events and activities." />
-        <meta property="og:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="og:url" content="https://indoamericanjjr.com/gallery" />
+        <meta property="og:site_name" content="Indo American School Jhajjar" />
+        <meta property="og:title" content="Campus Photo Gallery | Indo American School Jhajjar" />
+        <meta property="og:description" content="Explore photos from academic, cultural, and sports events at Indo American School Jhajjar." />
+        <meta property="og:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://indoamericanschool.edu.in/gallery" />
-        <meta property="twitter:title" content="Photo Gallery | Indo American School, Jhajjar | Life at IAS" />
-        <meta property="twitter:description" content="Experience life at Indo American School through our vibrant collection of photos from various school events and activities." />
-        <meta property="twitter:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="twitter:url" content="https://indoamericanjjr.com/gallery" />
+        <meta property="twitter:title" content="Campus Photo Gallery | Indo American School Jhajjar" />
+        <meta property="twitter:description" content="Explore photos from Indo American School Jhajjar." />
+        <meta property="twitter:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ImageGallery",
-            "name": "Indo American School Photo Gallery",
-            "description": "Visual highlights and moments from Indo American School, Jhajjar.",
-            "publisher": {
-              "@type": "EducationalOrganization",
-              "name": "Indo American School",
-              "logo": "https://indoamericanschool.edu.in/indo-logo.png"
-            }
+            "@graph": [
+              {
+                "@type": "ImageGallery",
+                "name": "Indo American School Jhajjar Photo Gallery",
+                "url": "https://indoamericanjjr.com/gallery",
+                "description": "Visual highlights and photos from Indo American School Jhajjar.",
+                "publisher": {
+                  "@type": "School",
+                  "name": "Indo American School Jhajjar",
+                  "logo": "https://indoamericanjjr.com/indo-logo.png"
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://indoamericanjjr.com/" },
+                  { "@type": "ListItem", "position": 2, "name": "Gallery", "item": "https://indoamericanjjr.com/gallery" }
+                ]
+              }
+            ]
           })}
         </script>
       </Helmet>

@@ -71,37 +71,49 @@ const Announcements = () => {
   return (
     <>
       <Helmet>
-        <title>Latest School Announcements & Notices | Indo American School, Jhajjar</title>
-        <meta name="description" content="Stay updated with the latest news, urgent notices, and important announcements from Indo American School, Jhajjar. Access official school circulars and updates here." />
-        <meta name="keywords" content="school notices, school circulars, school announcements Jhajjar, Indo American School updates, urgent school news" />
-        <link rel="canonical" href="https://indoamericanschool.edu.in/announcements" />
+        <title>Latest Announcements & Notices | Indo American School Jhajjar</title>
+        <meta name="description" content="Stay updated with official announcements, exam circulars, holiday notices, and urgent news from Indo American School Jhajjar." />
+        <meta name="keywords" content="Indo American School announcements, school notices Jhajjar, school circulars Jhajjar, IAS Jhajjar news" />
+        <link rel="canonical" href="https://indoamericanjjr.com/announcements" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://indoamericanschool.edu.in/announcements" />
-        <meta property="og:title" content="Latest School Announcements & Notices | Indo American School, Jhajjar" />
-        <meta property="og:description" content="Stay updated with the latest news, urgent notices, and important announcements from Indo American School, Jhajjar." />
-        <meta property="og:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="og:url" content="https://indoamericanjjr.com/announcements" />
+        <meta property="og:site_name" content="Indo American School Jhajjar" />
+        <meta property="og:title" content="Latest Announcements & Notices | Indo American School Jhajjar" />
+        <meta property="og:description" content="Stay updated with official school circulars and announcements from Indo American School Jhajjar." />
+        <meta property="og:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://indoamericanschool.edu.in/announcements" />
-        <meta property="twitter:title" content="Latest School Announcements & Notices | Indo American School, Jhajjar" />
-        <meta property="twitter:description" content="Stay updated with the latest news, urgent notices, and important announcements from Indo American School, Jhajjar." />
-        <meta property="twitter:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="twitter:url" content="https://indoamericanjjr.com/announcements" />
+        <meta property="twitter:title" content="Latest Announcements & Notices | Indo American School Jhajjar" />
+        <meta property="twitter:description" content="Stay updated with official school circulars from Indo American School Jhajjar." />
+        <meta property="twitter:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": "School Announcements",
-            "description": "Latest updates and notices from Indo American School.",
-            "publisher": {
-              "@type": "EducationalOrganization",
-              "name": "Indo American School",
-              "logo": "https://indoamericanschool.edu.in/indo-logo.png"
-            }
+            "@graph": [
+              {
+                "@type": "WebPage",
+                "name": "Announcements & Notices - Indo American School Jhajjar",
+                "url": "https://indoamericanjjr.com/announcements",
+                "publisher": {
+                  "@type": "School",
+                  "name": "Indo American School Jhajjar",
+                  "logo": "https://indoamericanjjr.com/indo-logo.png"
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://indoamericanjjr.com/" },
+                  { "@type": "ListItem", "position": 2, "name": "Announcements", "item": "https://indoamericanjjr.com/announcements" }
+                ]
+              }
+            ]
           })}
         </script>
       </Helmet>

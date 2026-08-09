@@ -149,37 +149,50 @@ const Admissions = () => {
   return (
     <>
       <Helmet>
-        <title>School Admissions 2026-27 | Indo American School, Jhajjar | Apply Online</title>
-        <meta name="description" content="Apply for admissions 2026-27 at Indo American School, Jhajjar. Experience our simple 5-step admission process, view required documents, and submit your enquiry online for Nursery to Class XII." />
-        <meta name="keywords" content="school admission Jhajjar, apply online school, school admission process, required documents for admission, school fee structure Jhajjar" />
-        <link rel="canonical" href="https://indoamericanschool.edu.in/admissions" />
+        <title>Online Fee Collection & Admissions 2026-27 | Indo American School Jhajjar</title>
+        <meta name="description" content="Apply for admissions 2026-27 and check online fee details at Indo American School Jhajjar. 5-step admission process, fee structure, required documents, and online enquiry for Nursery to Class XII." />
+        <meta name="keywords" content="Online Fee Collection Indo American School, school admission Jhajjar 2026-27, Indo American Jhajjar fee structure, apply online school Jhajjar, admission procedure Jhajjar" />
+        <link rel="canonical" href="https://indoamericanjjr.com/admissions" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://indoamericanschool.edu.in/admissions" />
-        <meta property="og:title" content="School Admissions 2026-27 | Indo American School, Jhajjar" />
-        <meta property="og:description" content="Join the Indo American School family. Complete our simple admission process for Nursery to Class XII. Apply online today!" />
-        <meta property="og:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="og:url" content="https://indoamericanjjr.com/admissions" />
+        <meta property="og:site_name" content="Indo American School Jhajjar" />
+        <meta property="og:title" content="Online Fee Collection & Admissions 2026-27 | Indo American School Jhajjar" />
+        <meta property="og:description" content="Join Indo American School Jhajjar. Complete our simple 5-step admission process for Nursery to Class XII and view fee structure online." />
+        <meta property="og:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://indoamericanschool.edu.in/admissions" />
-        <meta property="twitter:title" content="School Admissions 2026-27 | Indo American School, Jhajjar" />
-        <meta property="twitter:description" content="Join the Indo American School family. Complete our simple admission process for Nursery to Class XII. Apply online today!" />
-        <meta property="twitter:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="twitter:url" content="https://indoamericanjjr.com/admissions" />
+        <meta property="twitter:title" content="Online Fee Collection & Admissions | Indo American School Jhajjar" />
+        <meta property="twitter:description" content="Admissions open for session 2026-27 from Nursery to Class XII." />
+        <meta property="twitter:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": "Admissions",
-            "description": "Information about the admission process and requirements at Indo American School.",
-            "publisher": {
-              "@type": "EducationalOrganization",
-              "name": "Indo American School",
-              "logo": "https://indoamericanschool.edu.in/indo-logo.png"
-            }
+            "@graph": [
+              {
+                "@type": "WebPage",
+                "name": "Online Fee Collection & Admissions - Indo American School Jhajjar",
+                "url": "https://indoamericanjjr.com/admissions",
+                "description": "Admission guidelines, fee collection details, and online enquiry form for Indo American School Jhajjar.",
+                "publisher": {
+                  "@type": "School",
+                  "name": "Indo American School Jhajjar",
+                  "logo": "https://indoamericanjjr.com/indo-logo.png"
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://indoamericanjjr.com/" },
+                  { "@type": "ListItem", "position": 2, "name": "Admissions & Fee", "item": "https://indoamericanjjr.com/admissions" }
+                ]
+              }
+            ]
           })}
         </script>
       </Helmet>

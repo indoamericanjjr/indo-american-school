@@ -60,37 +60,50 @@ const Documents = () => {
   return (
     <>
       <Helmet>
-        <title>CBSE Mandatory Disclosures & Documents | Indo American School, Jhajjar</title>
-        <meta name="description" content="Access official CBSE mandatory disclosures, school safety certificates, academic policies, and administrative documents for Indo American School, Jhajjar. Transparency as per RTE Act." />
-        <meta name="keywords" content="CBSE mandatory disclosure, school documents Jhajjar, school safety certificate, RTE compliance school, school governance documents" />
-        <link rel="canonical" href="https://indoamericanschool.edu.in/documents" />
+        <title>Fee Structure PDF & CBSE Mandatory Disclosures | Indo American School Jhajjar</title>
+        <meta name="description" content="Access Fee Structure PDF, official CBSE mandatory disclosures, school safety certificates, academic policies, and administrative documents for Indo American School Jhajjar. Transparency as per RTE Act." />
+        <meta name="keywords" content="Fee Structure JJR PDF, Fee_Structure_JJR.pdf, CBSE mandatory disclosure Jhajjar, school documents Jhajjar, school safety certificate Jhajjar, RTE compliance school" />
+        <link rel="canonical" href="https://indoamericanjjr.com/documents" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://indoamericanschool.edu.in/documents" />
-        <meta property="og:title" content="CBSE Mandatory Disclosures & Documents | Indo American School, Jhajjar" />
-        <meta property="og:description" content="Official school documents and disclosures as per CBSE guidelines. Accessible for parents and regulators." />
-        <meta property="og:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="og:url" content="https://indoamericanjjr.com/documents" />
+        <meta property="og:site_name" content="Indo American School Jhajjar" />
+        <meta property="og:title" content="Fee Structure PDF & CBSE Mandatory Disclosures | Indo American School Jhajjar" />
+        <meta property="og:description" content="Official school documents, fee structure PDF, and disclosures as per CBSE guidelines." />
+        <meta property="og:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://indoamericanschool.edu.in/documents" />
-        <meta property="twitter:title" content="CBSE Mandatory Disclosures & Documents | Indo American School, Jhajjar" />
-        <meta property="twitter:description" content="Official school documents and disclosures as per CBSE guidelines. Accessible for parents and regulators." />
-        <meta property="twitter:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="twitter:url" content="https://indoamericanjjr.com/documents" />
+        <meta property="twitter:title" content="Fee Structure & CBSE Mandatory Disclosures | Indo American School Jhajjar" />
+        <meta property="twitter:description" content="Official school documents and fee disclosures as per CBSE guidelines." />
+        <meta property="twitter:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": "Mandatory Disclosures",
-            "description": "Public documentation and mandatory disclosures of Indo American School, Jhajjar.",
-            "publisher": {
-              "@type": "EducationalOrganization",
-              "name": "Indo American School",
-              "logo": "https://indoamericanschool.edu.in/indo-logo.png"
-            }
+            "@graph": [
+              {
+                "@type": "WebPage",
+                "name": "Fee Structure & Mandatory Disclosures - Indo American School Jhajjar",
+                "url": "https://indoamericanjjr.com/documents",
+                "description": "Public documentation, fee structure PDF, and mandatory disclosures of Indo American School Jhajjar.",
+                "publisher": {
+                  "@type": "School",
+                  "name": "Indo American School Jhajjar",
+                  "logo": "https://indoamericanjjr.com/indo-logo.png"
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://indoamericanjjr.com/" },
+                  { "@type": "ListItem", "position": 2, "name": "Documents & Disclosures", "item": "https://indoamericanjjr.com/documents" }
+                ]
+              }
+            ]
           })}
         </script>
       </Helmet>

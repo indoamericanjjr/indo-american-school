@@ -97,8 +97,19 @@ const getCloudinaryUrl = (fn) => {
     });
     if (matchedKey) url = uploadsMap[matchedKey];
   }
-  if (url && url.includes('/upload/') && !url.includes('/f_auto,q_auto/')) {
-    url = url.replace('/upload/', '/upload/f_auto,q_auto/');
+  if (!url) return null;
+
+  const isPdf = fn.toLowerCase().endsWith('.pdf') || url.toLowerCase().includes('.pdf');
+
+  if (isPdf) {
+    url = url.replace('/f_auto,q_auto/', '/');
+    if (url.includes('/image/upload/') && !url.includes('/fl_inline/')) {
+      url = url.replace('/image/upload/', '/image/upload/fl_inline/');
+    }
+  } else {
+    if (url.includes('/upload/') && !url.includes('/f_auto,q_auto/')) {
+      url = url.replace('/upload/', '/upload/f_auto,q_auto/');
+    }
   }
   return url;
 };

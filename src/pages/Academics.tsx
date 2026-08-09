@@ -135,54 +135,56 @@ const Academics = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Academic Programs CBSE Curriculum | Indo American School, Jhajjar</title>
-        <meta name="description" content="Explore Indo American School's comprehensive CBSE curriculum from Nursery to Class XII. Special academic programs, experienced faculty, and modern teaching methodologies for holistic education." />
-        <meta name="keywords" content="CBSE curriculum, school academics, educational programs, CBSE school Jhajjar, academic excellence, teaching methodology" />
-        <link rel="canonical" href="https://indoamericanschool.edu.in/academics" />
+        <title>Academics & Curriculum | CBSE Programs | Indo American School Jhajjar</title>
+        <meta name="description" content="Explore Indo American School Jhajjar's CBSE curriculum from Nursery to Class XII. Special academic programs in Science (Medical/Non-Medical), Commerce & Arts with experienced faculty and practical labs." />
+        <meta name="keywords" content="CBSE curriculum Jhajjar, school academics Jhajjar, Science stream Jhajjar, Commerce stream Jhajjar, CBSE school Jhajjar academic excellence, Class 11 12 streams Jhajjar" />
+        <link rel="canonical" href="https://indoamericanjjr.com/academics" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://indoamericanschool.edu.in/academics" />
-        <meta property="og:title" content="Academic Programs CBSE Curriculum | Indo American School, Jhajjar" />
-        <meta property="og:description" content="Comprehensive CBSE curriculum from Nursery to Class XII with special programs and modern teaching methodologies." />
-        <meta property="og:image" content="https://indoamericanschool.edu.in/uploads/indo-logo.png" />
+        <meta property="og:url" content="https://indoamericanjjr.com/academics" />
+        <meta property="og:site_name" content="Indo American School Jhajjar" />
+        <meta property="og:title" content="Academics & Curriculum | CBSE Programs | Indo American School Jhajjar" />
+        <meta property="og:description" content="Comprehensive CBSE curriculum from Nursery to Class XII with special programs, modern labs, and experienced faculty." />
+        <meta property="og:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://indoamericanschool.edu.in/academics" />
-        <meta property="twitter:title" content="Academic Programs CBSE Curriculum | Indo American School, Jhajjar" />
-        <meta property="twitter:description" content="Comprehensive CBSE curriculum from Nursery to Class XII with special programs and modern teaching methodologies." />
-        <meta property="twitter:image" content="https://indoamericanschool.edu.in/uploads/indo-logo.png" />
+        <meta property="twitter:url" content="https://indoamericanjjr.com/academics" />
+        <meta property="twitter:title" content="Academics & Curriculum | Indo American School Jhajjar" />
+        <meta property="twitter:description" content="Comprehensive CBSE curriculum from Nursery to Class XII." />
+        <meta property="twitter:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Additional SEO */}
-        <meta name="author" content="Indo American School" />
-        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Indo American School Jhajjar" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
         <meta name="language" content="English" />
         <meta name="geo.region" content="IN-HR" />
-        <meta name="geo.placename" content="Jhajjar" />
+        <meta name="geo.placename" content="Jhajjar, Haryana" />
 
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            "name": "Indo American School",
-            "description": "CBSE affiliated school offering comprehensive academic programs",
-            "url": "https://indoamericanschool.edu.in/academics",
-            "logo": "https://indoamericanschool.edu.in/uploads/indo-logo.png",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Agrasen Chowk",
-              "addressLocality": "Jhajjar",
-              "addressRegion": "Haryana",
-              "postalCode": "124103",
-              "addressCountry": "IN"
-            },
-            "educationalCredentialAwarded": "CBSE Class X and XII Certificates",
-            "hasEducationalUse": "Primary Education, Secondary Education, Senior Secondary Education",
-            "teaches": [
-              "Mathematics", "Science", "English", "Hindi", "Social Science",
-              "Computer Science", "Physical Education", "Arts", "Music"
+            "@graph": [
+              {
+                "@type": "WebPage",
+                "name": "Academics & Curriculum - Indo American School Jhajjar",
+                "url": "https://indoamericanjjr.com/academics",
+                "description": "CBSE affiliated school offering comprehensive academic programs from Nursery to Class 12th in Jhajjar, Haryana.",
+                "publisher": {
+                  "@type": "School",
+                  "name": "Indo American School Jhajjar",
+                  "logo": "https://indoamericanjjr.com/indo-logo.png"
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://indoamericanjjr.com/" },
+                  { "@type": "ListItem", "position": 2, "name": "Academics", "item": "https://indoamericanjjr.com/academics" }
+                ]
+              }
             ]
           })}
         </script>

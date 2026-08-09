@@ -52,46 +52,60 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>About Us | Indo American School, Jhajjar | Our Legacy & Vision</title>
-        <meta name="description" content="Learn about the legacy of Indo American School, Jhajjar. Established in 2002, we follow the CBSE curriculum with a mission to nurture young minds through quality education and holistic development." />
-        <meta name="keywords" content="Indo American School history, school director, school principal, school vision, educational mission, Jhajjar school legacy" />
-        <link rel="canonical" href="https://indoamericanschool.edu.in/about" />
+        <title>Who We Are | About Indo American School Jhajjar | Our Legacy & Vision</title>
+        <meta name="description" content="Learn about the 24+ years legacy of Indo American School Jhajjar. Established in 2002, we follow the CBSE curriculum (Affiliation No: 530460) with a mission to nurture young minds through quality education, leadership, and holistic development." />
+        <meta name="keywords" content="Indo American School Jhajjar history, Who We Are Indo American School, school director Bijender Kadian, principal message Mrs Mamta, school vision Jhajjar, educational mission Haryana, Jhajjar school legacy" />
+        <link rel="canonical" href="https://indoamericanjjr.com/about" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://indoamericanschool.edu.in/about" />
-        <meta property="og:title" content="About Us | Indo American School, Jhajjar | Our Legacy & Vision" />
-        <meta property="og:description" content="Discover our journey since 2002, our core values, and the leadership team dedicated to educational excellence at Indo American School." />
-        <meta property="og:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="og:url" content="https://indoamericanjjr.com/about" />
+        <meta property="og:site_name" content="Indo American School Jhajjar" />
+        <meta property="og:title" content="Who We Are | About Indo American School Jhajjar" />
+        <meta property="og:description" content="Discover our journey since 2002, our core values, vision, and leadership team dedicated to educational excellence at Indo American School Jhajjar." />
+        <meta property="og:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://indoamericanschool.edu.in/about" />
-        <meta property="twitter:title" content="About Us | Indo American School, Jhajjar | Our Legacy & Vision" />
-        <meta property="twitter:description" content="Discover our journey since 2002, our core values, and the leadership team dedicated to educational excellence at Indo American School." />
-        <meta property="twitter:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="twitter:url" content="https://indoamericanjjr.com/about" />
+        <meta property="twitter:title" content="Who We Are | About Indo American School Jhajjar" />
+        <meta property="twitter:description" content="Discover our journey since 2002, core values, and leadership team dedicated to excellence." />
+        <meta property="twitter:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "AboutPage",
-            "mainEntity": {
-              "@type": "EducationalOrganization",
-              "name": "Indo American School",
-              "foundingDate": "2002",
-              "founder": "Bijender Kadian",
-              "description": "Indo American School is a premier CBSE affiliated school in Jhajjar, Haryana, dedicated to providing quality education.",
-              "logo": "https://indoamericanschool.edu.in/indo-logo.png",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Agrasen Chowk",
-                "addressLocality": "Jhajjar",
-                "addressRegion": "Haryana",
-                "postalCode": "124103",
-                "addressCountry": "IN"
+            "@graph": [
+              {
+                "@type": "AboutPage",
+                "name": "Who We Are - About Indo American School Jhajjar",
+                "url": "https://indoamericanjjr.com/about",
+                "mainEntity": {
+                  "@type": "School",
+                  "name": "Indo American School Jhajjar",
+                  "foundingDate": "2002",
+                  "founder": "Bijender Kadian",
+                  "description": "Indo American School is a premier CBSE affiliated senior secondary school in Jhajjar, Haryana, dedicated to providing quality education.",
+                  "logo": "https://indoamericanjjr.com/indo-logo.png",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Agrasen Chowk / Talao Road",
+                    "addressLocality": "Jhajjar",
+                    "addressRegion": "Haryana",
+                    "postalCode": "124103",
+                    "addressCountry": "IN"
+                  }
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://indoamericanjjr.com/" },
+                  { "@type": "ListItem", "position": 2, "name": "About Us", "item": "https://indoamericanjjr.com/about" }
+                ]
               }
-            }
+            ]
           })}
         </script>
       </Helmet>

@@ -168,67 +168,49 @@ const Events = () => {
   return (
     <Layout>
       <Helmet>
-        <title>School Events & Activities Calendar | Indo American School, Jhajjar</title>
-        <meta name="description" content="Discover Indo American School's vibrant events calendar including academic events, sports meets, cultural festivals, and national celebrations. Stay updated with our annual school calendar 2026-27." />
-        <meta name="keywords" content="school events, academic calendar, school activities, cultural events, sports events, Indo American School calendar" />
-        <link rel="canonical" href="https://indoamericanschool.edu.in/events" />
+        <title>Events & Activity Calendar | Indo American School Jhajjar</title>
+        <meta name="description" content="Explore upcoming events, annual sports meet, science exhibitions, and cultural programs at Indo American School Jhajjar for session 2026-27." />
+        <meta name="keywords" content="Indo American School events, school calendar Jhajjar, annual sports day Jhajjar, science exhibition Jhajjar" />
+        <link rel="canonical" href="https://indoamericanjjr.com/events" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://indoamericanschool.edu.in/events" />
-        <meta property="og:title" content="School Events & Activities Calendar | Indo American School, Jhajjar" />
-        <meta property="og:description" content="Discover our vibrant events calendar including academic events, sports meets, cultural festivals, and national celebrations." />
-        <meta property="og:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="og:url" content="https://indoamericanjjr.com/events" />
+        <meta property="og:site_name" content="Indo American School Jhajjar" />
+        <meta property="og:title" content="Events & Activity Calendar | Indo American School Jhajjar" />
+        <meta property="og:description" content="Annual calendar, upcoming sports meets, cultural celebrations, and academic exhibitions at Indo American School Jhajjar." />
+        <meta property="og:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://indoamericanschool.edu.in/events" />
-        <meta property="twitter:title" content="School Events & Activities Calendar | Indo American School, Jhajjar" />
-        <meta property="twitter:description" content="Discover our vibrant events calendar including academic events, sports meets, cultural festivals, and national celebrations." />
-        <meta property="twitter:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
-
-        {/* Additional SEO */}
-        <meta name="author" content="Indo American School" />
-        <meta name="robots" content="index, follow" />
-        <meta name="language" content="English" />
-        <meta name="geo.region" content="IN-HR" />
-        <meta name="geo.placename" content="Jhajjar" />
+        <meta property="twitter:url" content="https://indoamericanjjr.com/events" />
+        <meta property="twitter:title" content="Events & Activity Calendar | Indo American School Jhajjar" />
+        <meta property="twitter:description" content="Upcoming events and annual calendar at Indo American School Jhajjar." />
+        <meta property="twitter:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            "name": "Indo American School",
-            "description": "CBSE affiliated school offering comprehensive events and activities calendar",
-            "url": "https://indoamericanschool.edu.in/events",
-            "logo": "https://indoamericanschool.edu.in/indo-logo.png",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Agrasen Chowk",
-              "addressLocality": "Jhajjar",
-              "addressRegion": "Haryana",
-              "postalCode": "124103",
-              "addressCountry": "IN"
-            },
-            "event": upcomingEvents.slice(0, 5).map(event => ({
-              "@type": "Event",
-              "name": event.title,
-              "description": event.description,
-              "startDate": event.date,
-              "location": {
-                "@type": "Place",
-                "name": event.venue || "Indo American School",
-                "address": {
-                  "@type": "PostalAddress",
-                  "streetAddress": "Agrasen Chowk",
-                  "addressLocality": "Jhajjar",
-                  "addressRegion": "Haryana",
-                  "postalCode": "124103",
-                  "addressCountry": "IN"
+            "@graph": [
+              {
+                "@type": "WebPage",
+                "name": "Events & Activities Calendar - Indo American School Jhajjar",
+                "url": "https://indoamericanjjr.com/events",
+                "publisher": {
+                  "@type": "School",
+                  "name": "Indo American School Jhajjar",
+                  "logo": "https://indoamericanjjr.com/indo-logo.png"
                 }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://indoamericanjjr.com/" },
+                  { "@type": "ListItem", "position": 2, "name": "Events", "item": "https://indoamericanjjr.com/events" }
+                ]
               }
-            }))
+            ]
           })}
         </script>
       </Helmet>

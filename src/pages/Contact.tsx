@@ -6,44 +6,58 @@ const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Contact Us | Indo American School, Jhajjar | Get in Touch</title>
-        <meta name="description" content="Get in touch with Indo American School, Jhajjar. Find our school address, phone numbers, email, and location on the map. Reach out to us for any queries or campus visits." />
-        <meta name="keywords" content="contact Indo American School, school address Jhajjar, school phone number, school location map, admission enquiry contact" />
-        <link rel="canonical" href="https://indoamericanschool.edu.in/contact" />
+        <title>Contact Us | Indo American School Jhajjar | Address & Phone</title>
+        <meta name="description" content="Contact Indo American School Jhajjar. Find address (Agrasen Chowk / Talao Road, Jhajjar), phone number (+91 98132 88030), email (american.indo2@gmail.com) and map directions." />
+        <meta name="keywords" content="Contact Us Indo American School, school address Jhajjar, school phone number Jhajjar, Indo American Jhajjar location, school enquiry Jhajjar" />
+        <link rel="canonical" href="https://indoamericanjjr.com/contact" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://indoamericanschool.edu.in/contact" />
-        <meta property="og:title" content="Contact Us | Indo American School, Jhajjar | Get in Touch" />
-        <meta property="og:description" content="Reach out to us for any queries or campus visits. We are located Agrasen Chowk, Jhajjar." />
-        <meta property="og:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="og:url" content="https://indoamericanjjr.com/contact" />
+        <meta property="og:site_name" content="Indo American School Jhajjar" />
+        <meta property="og:title" content="Contact Us | Indo American School Jhajjar" />
+        <meta property="og:description" content="Get in touch with Indo American School Jhajjar. Located at Agrasen Chowk / Talao Road, Jhajjar, Haryana." />
+        <meta property="og:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://indoamericanschool.edu.in/contact" />
-        <meta property="twitter:title" content="Contact Us | Indo American School, Jhajjar | Get in Touch" />
-        <meta property="twitter:description" content="Reach out to us for any queries or campus visits. We are located Agrasen Chowk, Jhajjar." />
-        <meta property="twitter:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="twitter:url" content="https://indoamericanjjr.com/contact" />
+        <meta property="twitter:title" content="Contact Us | Indo American School Jhajjar" />
+        <meta property="twitter:description" content="Get in touch with Indo American School Jhajjar." />
+        <meta property="twitter:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ContactPage",
-            "mainEntity": {
-              "@type": "EducationalOrganization",
-              "name": "Indo American School",
-              "telephone": "+91 98132 88030",
-              "email": "american.indo2@gmail.com",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Agrasen Chowk",
-                "addressLocality": "Jhajjar",
-                "addressRegion": "Haryana",
-                "postalCode": "124103",
-                "addressCountry": "IN"
+            "@graph": [
+              {
+                "@type": "ContactPage",
+                "name": "Contact Us - Indo American School Jhajjar",
+                "url": "https://indoamericanjjr.com/contact",
+                "mainEntity": {
+                  "@type": "School",
+                  "name": "Indo American School Jhajjar",
+                  "telephone": "+91 98132 88030",
+                  "email": "american.indo2@gmail.com",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Agrasen Chowk / Talao Road",
+                    "addressLocality": "Jhajjar",
+                    "addressRegion": "Haryana",
+                    "postalCode": "124103",
+                    "addressCountry": "IN"
+                  }
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://indoamericanjjr.com/" },
+                  { "@type": "ListItem", "position": 2, "name": "Contact Us", "item": "https://indoamericanjjr.com/contact" }
+                ]
               }
-            }
+            ]
           })}
         </script>
       </Helmet>

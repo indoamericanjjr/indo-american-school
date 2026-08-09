@@ -159,37 +159,50 @@ const Facilities = () => {
   return (
     <>
       <Helmet>
-        <title>Campus Facilities | Indo American School, Jhajjar | Smart Class rooms & Labs</title>
-        <meta name="description" content="Explore the world-class facilities at Indo American School, Jhajjar. Our campus includes smart classrooms, advanced science & computer labs, a huge library, and comprehensive sports complex." />
-        <meta name="keywords" content="Indo American School facilities, school laboratories, smart classrooms, school library, sports facilities, school transport Jhajjar" />
-        <link rel="canonical" href="https://indoamericanschool.edu.in/facilities" />
+        <title>Campus Facilities & Labs | Indo American School Jhajjar</title>
+        <meta name="description" content="Explore world-class campus facilities at Indo American School Jhajjar: 5-acre campus, smart classrooms, Physics/Chemistry/Biology/Computer labs, robotics lab, sports grounds, library & transport." />
+        <meta name="keywords" content="Indo American School facilities, school labs Jhajjar, smart classrooms Jhajjar, science lab Jhajjar, robotics lab Jhajjar, school transport Jhajjar" />
+        <link rel="canonical" href="https://indoamericanjjr.com/facilities" />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://indoamericanschool.edu.in/facilities" />
-        <meta property="og:title" content="Campus Facilities | Indo American School, Jhajjar | Smart Classrooms & Labs" />
-        <meta property="og:description" content="Take a tour of our academic facilities, smart classrooms, and support services designed for student excellence." />
-        <meta property="og:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="og:url" content="https://indoamericanjjr.com/facilities" />
+        <meta property="og:site_name" content="Indo American School Jhajjar" />
+        <meta property="og:title" content="Campus Facilities & Labs | Indo American School Jhajjar" />
+        <meta property="og:description" content="Tour our 5-acre campus, smart classrooms, science labs, library, and sports complex at Indo American School Jhajjar." />
+        <meta property="og:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://indoamericanschool.edu.in/facilities" />
-        <meta property="twitter:title" content="Campus Facilities | Indo American School, Jhajjar | Smart Classrooms & Labs" />
-        <meta property="twitter:description" content="Take a tour of our academic facilities, smart classrooms, and support services designed for student excellence." />
-        <meta property="twitter:image" content="https://indoamericanschool.edu.in/indo-logo.png" />
+        <meta property="twitter:url" content="https://indoamericanjjr.com/facilities" />
+        <meta property="twitter:title" content="Campus Facilities & Labs | Indo American School Jhajjar" />
+        <meta property="twitter:description" content="World-class campus facilities at Indo American School Jhajjar." />
+        <meta property="twitter:image" content="https://indoamericanjjr.com/professional_enhanced_school_result.png" />
 
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": "School Facilities",
-            "description": "Information about the academic, sports, and support facilities at Indo American School.",
-            "publisher": {
-              "@type": "EducationalOrganization",
-              "name": "Indo American School",
-              "logo": "https://indoamericanschool.edu.in/indo-logo.png"
-            }
+            "@graph": [
+              {
+                "@type": "WebPage",
+                "name": "Facilities & Campus Infrastructure - Indo American School Jhajjar",
+                "url": "https://indoamericanjjr.com/facilities",
+                "description": "Details of science labs, smart classrooms, robotics lab, sports grounds, and transport facilities at Indo American School Jhajjar.",
+                "publisher": {
+                  "@type": "School",
+                  "name": "Indo American School Jhajjar",
+                  "logo": "https://indoamericanjjr.com/indo-logo.png"
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://indoamericanjjr.com/" },
+                  { "@type": "ListItem", "position": 2, "name": "Facilities", "item": "https://indoamericanjjr.com/facilities" }
+                ]
+              }
+            ]
           })}
         </script>
       </Helmet>

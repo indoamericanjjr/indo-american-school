@@ -5,9 +5,9 @@ const Privacy = () => {
   return (
     <>
       <Helmet>
-        <title>Privacy Policy | Indo American School, Jhajjar</title>
-        <meta name="description" content="Read the privacy policy of Indo American School, Jhajjar. Learn how we collect, use, and protect your personal information." />
-        <link rel="canonical" href="https://indoamericanschool.edu.in/privacy" />
+        <title>Privacy Policy | Indo American School Jhajjar</title>
+        <meta name="description" content="Read the privacy policy of Indo American School Jhajjar. Learn how we collect, use, and protect your personal information." />
+        <link rel="canonical" href="https://indoamericanjjr.com/privacy" />
       </Helmet>
       <Layout>
         <section className="bg-primary py-20">

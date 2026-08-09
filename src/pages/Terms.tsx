@@ -5,9 +5,9 @@ const Terms = () => {
   return (
     <>
       <Helmet>
-        <title>Terms of Service | Indo American School, Jhajjar</title>
-        <meta name="description" content="Read the terms and conditions for using the Indo American School website. Understand our policies and user agreements." />
-        <link rel="canonical" href="https://indoamericanschool.edu.in/terms" />
+        <title>Terms of Service | Indo American School Jhajjar</title>
+        <meta name="description" content="Read the terms and conditions for using the Indo American School Jhajjar website. Understand our policies and user agreements." />
+        <link rel="canonical" href="https://indoamericanjjr.com/terms" />
       </Helmet>
       <Layout>
         <section className="bg-primary py-20">
