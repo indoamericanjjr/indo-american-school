@@ -80,8 +80,9 @@ export default defineConfig(() => ({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,jpg}'],
-        globIgnores: ['uploads/**'],
-        // avoid precaching very large user-uploaded files in /uploads
+        globIgnores: ['uploads/**', 'sitemap.xml', 'robots.txt', 'ai.txt', '.well-known/**'],
+        // Prevent service worker from intercepting SEO/crawl files
+        navigateFallbackDenylist: [/^\/sitemap\.xml$/, /^\/robots\.txt$/, /^\/ai\.txt$/, /^\/favicon\.ico$/, /^\/.well-known\//, /^\/api\//],
         // increase cache limit to allow larger static images to be precached
         maximumFileSizeToCacheInBytes: 20 * 1024 * 1024,
         runtimeCaching: [
