@@ -12,7 +12,19 @@
     </image:image>
     <image:image>
       <image:loc>https://indoamericanjjr.com/indo-logo.png</image:loc>
-      <image:title>Indo American School Jhajjar Logo</image:title>
+      <image:title>Indo American School Jhajjar Official Logo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://indoamericanjjr.com/favicon-192x192.png</image:loc>
+      <image:title>Indo American School Jhajjar Site Icon 192px</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://indoamericanjjr.com/favicon-48x48.png</image:loc>
+      <image:title>Indo American School Jhajjar Google Search Favicon 48px</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://indoamericanjjr.com/icon-512.png</image:loc>
+      <image:title>Indo American School Jhajjar High Res App Icon 512px</image:title>
     </image:image>
   </url>
   <url>
