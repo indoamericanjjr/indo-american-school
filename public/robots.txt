@@ -2,6 +2,13 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
+# Allow Google Search and Favicon Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
 # Allow AI Search Crawlers for Generative Engine Optimization (GEO)
 User-agent: GPTBot
 Allow: /
