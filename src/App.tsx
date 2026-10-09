@@ -10,13 +10,12 @@ import { HelmetProvider } from "react-helmet-async";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Loading } from "@/components/ui/loading";
-import hero1 from "@/assets/hero-1.jpg";
-import heroNew from "@/assets/hero-new.jpg";
-import worldEducation from "@/assets/world-education.jpg";
-import sports from "@/assets/sports.jpg";
-import library from "@/assets/library.jpg";
+import hero1 from "@/assets/optimized/hero-1.webp";
+import heroNew from "@/assets/optimized/hero-new.webp";
+import worldEducation from "@/assets/optimized/world-education.webp";
+import sports from "@/assets/optimized/sports.webp";
+import library from "@/assets/optimized/library.webp";
 
-import { usePullToRefresh } from "@/hooks/use-pull-to-refresh";
 import ErrorBoundary from "@/components/ui/ErrorBoundary";
 import { CommandPalette } from "@/components/ui/command-palette";
 
@@ -93,14 +92,6 @@ const App = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Pull-to-refresh functionality
-  const handleRefresh = async () => {
-    // Simulate refresh by reloading the page or clearing cache
-    window.location.reload();
-  };
-
-  const { isRefreshing, pullDistance } = usePullToRefresh(handleRefresh);
-
   return (
     <ErrorBoundary>
       <HelmetProvider>
@@ -109,10 +100,6 @@ const App = () => {
             <TooltipProvider>
               <Toaster />
               <Sonner />
-            {/* Pull-to-refresh indicator */}
-            <div className={`pull-refresh-indicator ${pullDistance > 50 ? 'visible' : ''}`}>
-              {isRefreshing ? '🔄 Refreshing...' : '⬇️ Pull to refresh'}
-            </div>
 
             {showSplash ? (
               <Loading key="splash" isSplash />

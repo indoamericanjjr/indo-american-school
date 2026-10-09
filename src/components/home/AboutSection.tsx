@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { useSiteImages } from "@/hooks/use-site-images";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import about1 from "@/assets/about-1.jpg";
-import about2 from "@/assets/about-2.jpg";
-import about3 from "@/assets/about-3.jpg";
+import about1 from "@/assets/optimized/about-1.webp";
+import about2 from "@/assets/optimized/about-2.webp";
+import about3 from "@/assets/optimized/about-3.webp";
 
 const stats = [
   { icon: GraduationCap, value: "5000+", label: "Happy Students", color: "from-primary to-school-blue-light" },

@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import fs from "fs";
 import compression from 'vite-plugin-compression';
 import { VitePWA } from 'vite-plugin-pwa';
 
@@ -18,6 +19,14 @@ export default defineConfig(() => ({
       '/uploads': {
         target: 'http://localhost:3004',
         changeOrigin: true,
+        bypass: (req) => {
+          // If the file exists in public/uploads, serve it directly via Vite
+          const cleanUrl = (req.url || '').split('?')[0];
+          const localPath = path.join(__dirname, 'public', cleanUrl);
+          if (fs.existsSync(localPath)) {
+            return req.url;
+          }
+        }
       },
       '/view-pdf': {
         target: 'http://localhost:3004',
@@ -37,7 +46,7 @@ export default defineConfig(() => ({
     }),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'robots.txt', 'indo-logo.png'],
+      includeAssets: ['favicon.ico', 'robots.txt', 'favicon-192x192.png', 'icon-512.png'],
       manifest: {
         name: 'Indo American School',
         short_name: 'IAS Jhajjar',
@@ -50,23 +59,23 @@ export default defineConfig(() => ({
         start_url: '/',
         icons: [
           {
-            src: '/indo-logo.png',
+            src: '/favicon-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: '/indo-logo.png',
+            src: '/icon-512.png',
             sizes: '512x512',
             type: 'image/png'
           },
           {
-            src: '/indo-logo.png',
+            src: '/icon-512.png',
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable'
           },
           {
-            src: '/indo-logo.png',
+            src: '/apple-touch-icon.png',
             sizes: '180x180',
             type: 'image/png'
           }
@@ -83,8 +92,8 @@ export default defineConfig(() => ({
         globIgnores: ['uploads/**', 'sitemap.xml', 'robots.txt', 'ai.txt', '.well-known/**'],
         // Prevent service worker from intercepting SEO/crawl files
         navigateFallbackDenylist: [/^\/sitemap\.xml$/, /^\/robots\.txt$/, /^\/ai\.txt$/, /^\/favicon\.ico$/, /^\/.well-known\//, /^\/api\//],
-        // increase cache limit to allow larger static images to be precached
-        maximumFileSizeToCacheInBytes: 20 * 1024 * 1024,
+        // maximum file size allowed in precache
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

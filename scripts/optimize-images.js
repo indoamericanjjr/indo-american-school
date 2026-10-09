@@ -13,49 +13,50 @@ if (!fs.existsSync(optimizedDir)) {
   fs.mkdirSync(optimizedDir, { recursive: true });
 }
 
-const directoriesToScan = [assetsDir, optimizedDir];
+// Clean up any stray .tmp files first
+const strayTmp = fs.readdirSync(optimizedDir).filter(f => f.endsWith('.tmp'));
+for (const tmp of strayTmp) {
+  try { fs.unlinkSync(path.join(optimizedDir, tmp)); } catch (_) {}
+}
 
-for (const dir of directoriesToScan) {
-  if (!fs.existsSync(dir)) continue;
+const files = fs.readdirSync(assetsDir);
+for (const file of files) {
+  const ext = path.extname(file).toLowerCase();
+  const inputPath = path.join(assetsDir, file);
 
-  const files = fs.readdirSync(dir);
-  for (const file of files) {
-    const ext = path.extname(file).toLowerCase();
-    const inputPath = path.join(dir, file);
+  // Skip subdirectories and non-images
+  if (!fs.statSync(inputPath).isFile()) continue;
+  if (!['.jpg', '.jpeg', '.png', '.webp'].includes(ext)) continue;
 
-    // Skip if not an image or if it's already an optimized file in the optimized dir (unless we want to re-optimize)
-    if (!['.jpg', '.jpeg', '.png', '.webp'].includes(ext)) continue;
-    if (dir === optimizedDir && !['.webp'].includes(ext)) continue;
+  const outputName = file.replace(/\.[^.]+$/, '.webp');
+  const outputPath = path.join(optimizedDir, outputName);
+  const tmpPath = outputPath + '.tmp';
 
-    const outputPath = path.join(optimizedDir, file.replace(ext, '.webp'));
+  try {
+    const stats = fs.statSync(inputPath);
+    const isLogo = file.toLowerCase().includes('logo');
+    const options = isLogo ? { quality: 85, effort: 6 } : { quality: 78, effort: 5 };
 
-    try {
-      const stats = fs.statSync(inputPath);
-      // Only optimize if > 300KB or if it's a conversion
-      if (stats.size < 300 * 1024 && ext === '.webp') continue;
+    let pipeline = sharp(inputPath);
+    const metadata = await pipeline.metadata();
 
-      const isLogo = file.toLowerCase().includes('logo');
-      const options = isLogo ? { lossless: true } : { quality: 75, effort: 6 };
+    if (metadata.width && metadata.width > 1920) {
+      pipeline = pipeline.resize(1920, null, { withoutEnlargement: true });
+    }
 
-      let pipeline = sharp(inputPath);
+    await pipeline.webp(options).toFile(tmpPath);
 
-      // Resize if too large for web (e.g. 1920px max width)
-      const metadata = await pipeline.metadata();
-      if (metadata.width > 1920) {
-        pipeline = pipeline.resize(1920, null, { withoutEnlargement: true });
-      }
+    if (fs.existsSync(outputPath)) {
+      fs.unlinkSync(outputPath);
+    }
+    fs.renameSync(tmpPath, outputPath);
 
-      await pipeline
-        .webp(options)
-        .toFile(outputPath + '.tmp');
-
-      // Move tmp to final
-      fs.renameSync(outputPath + '.tmp', outputPath);
-
-      const newStats = fs.statSync(outputPath);
-      console.log(`Optimized ${file}: ${Math.round(stats.size / 1024)}KB -> ${Math.round(newStats.size / 1024)}KB`);
-    } catch (error) {
-      console.error(`Error optimizing ${file}:`, error);
+    const newStats = fs.statSync(outputPath);
+    console.log(`Optimized ${file}: ${Math.round(stats.size / 1024)}KB -> ${Math.round(newStats.size / 1024)}KB`);
+  } catch (error) {
+    console.error(`Error optimizing ${file}:`, error.message);
+    if (fs.existsSync(tmpPath)) {
+      try { fs.unlinkSync(tmpPath); } catch (_) {}
     }
   }
 }

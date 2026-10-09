@@ -29,7 +29,7 @@ const Gallery = () => {
         const response = await fetch('/api/gallery');
         if (response.ok) {
           const data = await response.json();
-          setImages(data);
+          setImages(Array.isArray(data) ? data : []);
         }
       } catch (error) {
         console.error('Error fetching gallery images:', error);

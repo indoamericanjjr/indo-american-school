@@ -30,7 +30,7 @@ const Announcements = () => {
       const response = await fetch('/api/announcements');
       if (response.ok) {
         const data = await response.json();
-        setAnnouncements(data);
+        setAnnouncements(Array.isArray(data) ? data : []);
       }
     } catch (error) {
       console.error('Error fetching announcements:', error);

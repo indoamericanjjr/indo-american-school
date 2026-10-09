@@ -20,7 +20,7 @@ const navLinks: NavLink[] = [
       { name: "Director's Message", path: "/about#principals-message" },
       { name: "Vision & Mission", path: "/about#vision-mission" },
       { name: "Core Values", path: "/about#core-values" },
-      { name: "Mandatory Disclosers", path: "/documents" },
+      { name: "Mandatory Disclosures", path: "/documents" },
       { name: "Facilities", path: "/facilities" },
     ]
   },

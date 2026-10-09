@@ -108,11 +108,6 @@
     font-optical-sizing: auto;
     width: 100%;
     position: relative;
-    /* Original Copy Protection */
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
   }
 
   h1,
@@ -183,9 +178,8 @@
   }
 
 
-  /* Original Interaction Handling */
+  /* Image Drag Handling */
   img {
-    pointer-events: none;
     -webkit-user-drag: none;
   }
 

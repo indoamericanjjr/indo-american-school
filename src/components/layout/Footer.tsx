@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Youtube, ArrowUp, Heart } from "lucide-react";
-import logo from "@/assets/indo-logo.jpg";
+import logo from "@/assets/optimized/indo-logo.webp";
 
 const Footer = () => {
   const scrollToTop = () => {

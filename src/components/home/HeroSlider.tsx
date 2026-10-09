@@ -5,11 +5,11 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import { ChevronLeft, ChevronRight, Play, Pause, Sparkles, ArrowRight, Phone, Instagram, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import hero1 from "@/assets/hero-1.jpg";
-import heroNew from "@/assets/hero-new.jpg";
-import worldEducation from "@/assets/world-education.jpg";
-import sports from "@/assets/sports.jpg";
-import library from "@/assets/library.jpg";
+import hero1 from "@/assets/optimized/hero-1.webp";
+import heroNew from "@/assets/optimized/hero-new.webp";
+import worldEducation from "@/assets/optimized/world-education.webp";
+import sports from "@/assets/optimized/sports.webp";
+import library from "@/assets/optimized/library.webp";
 
 const slideData = [
   {

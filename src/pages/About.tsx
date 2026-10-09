@@ -7,6 +7,10 @@ import { Helmet } from "react-helmet-async";
 import Tilt from "react-parallax-tilt";
 
 const schoolCampus = "/uploads/school-campus.jpg";
+import directorImg from "@/assets/optimized/about-1.webp";
+import principalImg from "@/assets/optimized/about-2.webp";
+import chairmanImg from "@/assets/optimized/about-3.webp";
+import culturalImg from "@/assets/optimized/cultural.webp";
 
 const About = () => {
   const ref = useRef(null);
@@ -42,9 +46,9 @@ const About = () => {
   ];
 
   const leadership = [
-    { name: "Bijender Kadian", role: "Director", image: "/assets/about-1.jpg", qualification: "M.A., B.Ed." },
-    { name: "Mrs. Mamta", role: "Principal", image: "/assets/about-2.jpg", qualification: "M.A., B.Ed." },
-    { name: "Mohit Kadian", role: "Chairman", image: "/assets/about-3.jpg", qualification: "M.Sc., M.Ed." },
+    { name: "Bijender Kadian", role: "Director", image: directorImg, qualification: "M.A., B.Ed." },
+    { name: "Mrs. Mamta", role: "Principal", image: principalImg, qualification: "M.A., B.Ed." },
+    { name: "Mohit Kadian", role: "Chairman", image: chairmanImg, qualification: "M.Sc., M.Ed." },
   ];
 
 
@@ -247,7 +251,7 @@ const About = () => {
               </div>
               <div className="order-1 lg:order-2">
                 <div className="aspect-[4/5] sm:aspect-square md:aspect-[4/3] lg:aspect-[3/4] rounded-3xl overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] border-[8px] border-white/90 dark:border-slate-800/90 ring-1 ring-black/5 image-zoom">
-                  <img src="/assets/cultural.jpg" alt="Principal" loading="lazy" className="w-full h-full object-cover" />
+                  <img src={culturalImg} alt="Director & Campus" loading="lazy" className="w-full h-full object-cover" />
                 </div>
               </div>
             </div>
@@ -318,6 +322,40 @@ const About = () => {
                     <p className="text-muted-foreground text-sm leading-relaxed">{value.description}</p>
                   </motion.div>
                 </Tilt>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* School Leadership */}
+        <section id="leadership" className="section-padding bg-muted/40 border-t border-border/50">
+          <div className="container-custom">
+            <div className="text-center mb-12">
+              <span className="text-secondary font-semibold text-sm uppercase tracking-wider">Our Guides & Mentors</span>
+              <h2 className="text-2xl md:text-4xl font-display font-bold mt-2">School Leadership</h2>
+              <p className="text-muted-foreground mt-2 max-w-xl mx-auto text-sm md:text-base">
+                Meet the experienced leadership dedicated to shaping students' future with academic rigor and moral values.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {leadership.map((leader, i) => (
+                <motion.div
+                  key={leader.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15 }}
+                  className="bg-card rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-lg transition-all"
+                >
+                  <div className="aspect-[4/3] overflow-hidden bg-muted">
+                    <img src={leader.image} alt={leader.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" />
+                  </div>
+                  <div className="p-6 text-center">
+                    <h3 className="text-xl font-display font-bold">{leader.name}</h3>
+                    <p className="text-primary font-medium text-sm mt-1">{leader.role}</p>
+                    <p className="text-muted-foreground text-xs mt-1">{leader.qualification}</p>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>

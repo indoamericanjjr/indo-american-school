@@ -9,6 +9,11 @@ if (!process.env.ADMIN_PASSWORD_HASH) {
   // bcrypt hash for password 'admin' (generated once above)
   process.env.ADMIN_PASSWORD_HASH = '$2b$10$nswerg1HOlt3G.wSBhoxeOLuMcqpO8DJn2k4nqvJ0ubI.rsjes.Bm';
 }
+if (!process.env.JWT_SECRET) {
+  console.warn('Backend: JWT_SECRET environment variable not provided. Using fallback secret for development.');
+  process.env.JWT_SECRET = 'ias_dev_jwt_secret_key_2026_fallback';
+}
+
 
 
 const multer = require('multer');
@@ -473,14 +478,19 @@ app.post('/api/admin/login', async (req, res) => {
 
   console.log('Login attempt:', { providedUser, expectedUser, hasHash: !!process.env.ADMIN_PASSWORD_HASH });
 
-  const isMatch = await bcrypt.compare(password, process.env.ADMIN_PASSWORD_HASH);
-  console.log('Password match:', isMatch);
+  try {
+    const isMatch = await bcrypt.compare(password, process.env.ADMIN_PASSWORD_HASH);
+    console.log('Password match:', isMatch);
 
-  if (providedUser === expectedUser && isMatch) {
-    const token = jwt.sign({ username: process.env.ADMIN_USERNAME || providedUser, role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '24h' });
-    res.json({ token });
-  } else {
-    res.status(401).json({ error: 'Invalid credentials' });
+    if (providedUser === expectedUser && isMatch) {
+      const token = jwt.sign({ username: process.env.ADMIN_USERNAME || providedUser, role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '24h' });
+      res.json({ token });
+    } else {
+      res.status(401).json({ error: 'Invalid credentials' });
+    }
+  } catch (err) {
+    console.error('Login error:', err);
+    res.status(500).json({ error: 'Authentication service error' });
   }
 });
 
@@ -525,8 +535,15 @@ const db = {
           }
         }
 
+        if (sql.toUpperCase().includes('ORDER BY')) {
+          const orderMatch = sql.match(/ORDER BY\s+([a-zA-Z0-9_]+)\s*(ASC|DESC)?/i);
+          if (orderMatch) {
+            query = query.order(orderMatch[1], { ascending: (orderMatch[2] || 'ASC').toUpperCase() === 'ASC' });
+          }
+        }
+
         const { data, error } = await query;
-        if (!error && data && data.length > 0) {
+        if (!error && Array.isArray(data)) {
           if (typeof cb === 'function') cb(null, data);
           return;
         }
@@ -579,13 +596,20 @@ const db = {
           record[col] = actualParams[idx];
         });
 
+        if (tableName === 'teacher_applications') {
+          if (record.name && !record.full_name) record.full_name = record.name;
+          if (record.post && !record.post_applied) record.post_applied = record.post;
+        }
+
         if (!memoryStore[tableName]) memoryStore[tableName] = [];
         memoryStore[tableName].unshift(record);
 
         // Async try insert to Supabase
         const supabase = supabaseClient.getClient();
         if (supabase) {
-          supabase.from(tableName).insert([record]).then(({ error }) => {
+          const supabaseRecord = { ...record };
+          delete supabaseRecord.id; // Let PostgreSQL generate identity id
+          supabase.from(tableName).insert([supabaseRecord]).then(({ error }) => {
             if (error) console.warn(`Supabase async insert note for ${tableName}:`, error.message);
           }).catch(e => console.warn(`Supabase async insert error on ${tableName}:`, e.message));
         }
@@ -608,6 +632,11 @@ const db = {
             updateFields[col] = actualParams[idx];
           }
         });
+
+        if (tableName === 'teacher_applications') {
+          if (updateFields.name && !updateFields.full_name) updateFields.full_name = updateFields.name;
+          if (updateFields.post && !updateFields.post_applied) updateFields.post_applied = updateFields.post;
+        }
 
         if (memoryStore[tableName]) {
           const item = memoryStore[tableName].find(r => String(r[whereCol]) === String(whereVal));
@@ -648,6 +677,7 @@ const db = {
         return;
       }
     }
+
 
     if (typeof cb === 'function') cb.call({ lastID: 1, changes: 1 }, null);
   },

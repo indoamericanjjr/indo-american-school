@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import logo from "@/assets/new-logo.jpg";
+import logo from "@/assets/optimized/new-logo.webp";
 
 interface LoadingProps {
   className?: string;

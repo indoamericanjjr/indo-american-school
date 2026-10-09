@@ -1,7 +1,7 @@
 import React, { Component, ErrorInfo, ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, Home, RotateCcw } from "lucide-react";
-import logo from "@/assets/indo-logo.jpg";
+import logo from "@/assets/optimized/indo-logo.webp";
 
 interface Props {
     children?: ReactNode;

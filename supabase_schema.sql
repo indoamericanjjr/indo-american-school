@@ -88,14 +88,18 @@ CREATE TABLE IF NOT EXISTS public.teacher_applications (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
 
+ALTER TABLE public.teacher_applications ADD COLUMN IF NOT EXISTS name TEXT;
 ALTER TABLE public.teacher_applications ADD COLUMN IF NOT EXISTS full_name TEXT;
 ALTER TABLE public.teacher_applications ADD COLUMN IF NOT EXISTS email TEXT;
 ALTER TABLE public.teacher_applications ADD COLUMN IF NOT EXISTS phone TEXT;
+ALTER TABLE public.teacher_applications ADD COLUMN IF NOT EXISTS post TEXT;
 ALTER TABLE public.teacher_applications ADD COLUMN IF NOT EXISTS post_applied TEXT;
+ALTER TABLE public.teacher_applications ADD COLUMN IF NOT EXISTS subject TEXT;
 ALTER TABLE public.teacher_applications ADD COLUMN IF NOT EXISTS qualification TEXT;
 ALTER TABLE public.teacher_applications ADD COLUMN IF NOT EXISTS experience TEXT;
 ALTER TABLE public.teacher_applications ADD COLUMN IF NOT EXISTS resume_url TEXT;
 ALTER TABLE public.teacher_applications ADD COLUMN IF NOT EXISTS created_at TIMESTAMP WITH TIME ZONE DEFAULT now();
+
 
 -- 7. Documents
 CREATE TABLE IF NOT EXISTS public.documents (
